@@ -1,0 +1,21 @@
+$ var getData = async () => {
+    return await ["red", "green", "blue"];
+};
+
+<await(getData)>
+  <@placeholder>
+    Loading...
+  </@placeholder>
+  <@then|data|>
+  	<ul>
+  		<for|d| of=data>
+    		<li style={ color: d }>
+      			${d}
+    		</li>
+  		</for>
+	  </ul>
+  </@then>
+  <@catch|err|>
+    Error: ${err.message}
+  </@catch>
+</await>
