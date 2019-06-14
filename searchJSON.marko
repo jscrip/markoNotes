@@ -1,0 +1,38 @@
+class {
+    onCreate() {
+        this.state = {
+            count:0,
+            query:"",
+            data:[],
+            filteredData:[]
+        };
+        this.getData().then(result => {
+        	this.state.data = result;
+        });
+    }
+    async getData () {
+    	return await new Promise((resolve) => {
+      		resolve([
+            	{title:"A",price:10},
+                {title:"B",price:15},
+                {title:"C",price:20}
+            ]);
+  		})
+    }
+    filterData(){
+    	this.state.filteredData = this.state.data
+        	.filter(d => d.title.toLowerCase().indexOf(this.state.query.toLowerCase()) > -1);
+        this.getEl('output').value = JSON.stringify(this.state.filteredData, null, 1);
+    }
+   	search () {
+    	var query = this.getEl('input').value;
+    	if(query != ""){
+        	this.state.query = this.getEl('input').value;
+        }
+    	this.filterData()
+  	}
+}
+
+<button on-click('search')>Search</button>
+<input key="input" type="text"/><br>
+<textarea key="output" rows=10 cols=30></textarea>
