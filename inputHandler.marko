@@ -1,0 +1,21 @@
+class {
+    onCreate() {
+        this.state = {
+            count:0,
+            msg:"No Input Was Entered."
+        };
+    }
+    popupAlert(){
+    	alert(this.state.msg);
+    }
+   	handleInput () {
+    	var msg = this.getEl('input').value;
+    	if(msg != ""){
+        	this.state.msg = this.getEl('input').value;
+        }
+    	this.popupAlert()
+  	}
+}
+
+<button on-click('handleInput')>Submit</button>
+<input key="input" type="text"/>
